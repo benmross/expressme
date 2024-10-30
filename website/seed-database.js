@@ -1,6 +1,17 @@
 // Add this script tag to your HTML temporarily
 // <script src="seed-database.js"></script>
+const firebaseConfig = {
+    apiKey: "AIzaSyCBHaULBqHDi1UASQMYZ1lc1st3y67qpH0",
+    authDomain: "expressme-27298.firebaseapp.com",
+    projectId: "expressme-27298",
+    storageBucket: "expressme-27298.appspot.com",
+    messagingSenderId: "719261410743",
+    appId: "1:719261410743:web:294854748d08aac2abb432"
+  };
+  
 
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 async function seedDatabase() {
     try {
         // Add students
