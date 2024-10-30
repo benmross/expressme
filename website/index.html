@@ -1,9 +1,35 @@
 <!doctype html>
 <html>
   <head>
-    <title>This is the title of the webpage!</title>
+    <title>Student Mood Tracker</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <p>This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page, just like this <strong>p</strong> tag and its contents.</p>
+    <div class="container">
+      <h1>Student Mood Dashboard</h1>
+      
+      <div class="filters">
+        <div class="filter-group">
+          <label for="student-select">Select Student:</label>
+          <select id="student-select">
+            <option value="">All Students</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="date-range">Date Range:</label>
+          <input type="date" id="date-start">
+          <input type="date" id="date-end">
+        </div>
+        
+        <button id="apply-filters">Apply Filters</button>
+      </div>
+
+      <div id="mood-data" class="mood-container">
+        <!-- Mood data will be populated here -->
+      </div>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
