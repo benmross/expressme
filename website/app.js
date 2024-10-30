@@ -1,5 +1,17 @@
-// Connect to MongoDB data (you'll need to set up an API endpoint)
-const API_URL = "mongodb+srv://benmross08:Rose7714@studentdata.fmx8b.mongodb.net/?retryWrites=true&w=majority&appName=StudentData";
+// Initialize Firebase (replace with your config)
+import { initializeApp } from "firebase/app";
+const firebaseConfig = {
+    apiKey: "AIzaSyCBHaULBqHDi1UASQMYZ1lc1st3y67qpH0",
+    authDomain: "expressme-27298.firebaseapp.com",
+    projectId: "expressme-27298",
+    storageBucket: "expressme-27298.appspot.com",
+    messagingSenderId: "719261410743",
+    appId: "1:719261410743:web:294854748d08aac2abb432"
+  };
+  
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // DOM Elements
 const studentSelect = document.getElementById('student-select');
@@ -31,29 +43,47 @@ async function fetchAndDisplayMoodData() {
     };
 
     try {
-        const response = await fetch(API_URL + constructQueryString(filters));
-        const data = await response.json();
+        let query = db.collection('moodEntries');
+        
+        if (filters.student) {
+            query = query.where('studentId', '==', filters.student);
+        }
+        if (filters.startDate) {
+            query = query.where('timestamp', '>=', new Date(filters.startDate));
+        }
+        if (filters.endDate) {
+            query = query.where('timestamp', '<=', new Date(filters.endDate));
+        }
+
+        const snapshot = await query.get();
+        const data = await Promise.all(snapshot.docs.map(async doc => {
+            const moodData = doc.data();
+            // Get student name if needed
+            if (moodData.studentId) {
+                const studentDoc = await db.collection('students').doc(moodData.studentId).get();
+                const studentData = studentDoc.data();
+                moodData.studentName = `${studentData.firstName} ${studentData.lastName}`;
+            }
+            return {
+                id: doc.id,
+                ...moodData
+            };
+        }));
+
         displayMoodData(data);
     } catch (error) {
         console.error('Failed to fetch mood data:', error);
     }
 }
 
-// Helper function to construct query string from filters
-function constructQueryString(filters) {
-    const params = new URLSearchParams();
-    if (filters.student) params.append('studentId', filters.student);
-    if (filters.startDate) params.append('startDate', filters.startDate);
-    if (filters.endDate) params.append('endDate', filters.endDate);
-    return '?' + params.toString();
-}
-
 // Fetch list of students from the database
 async function fetchStudents() {
     try {
-        const response = await fetch(`${API_URL}/students`);
-        const students = await response.json();
-        return students;
+        const snapshot = await db.collection('students').get();
+        return snapshot.docs.map(doc => ({
+            studentId: doc.id,
+            ...doc.data()
+        }));
     } catch (error) {
         console.error('Failed to fetch students:', error);
         return [];
