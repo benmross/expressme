@@ -1,5 +1,4 @@
 // Initialize Firebase (replace with your config)
-import { initializeApp } from "firebase/app";
 const firebaseConfig = {
     apiKey: "AIzaSyCBHaULBqHDi1UASQMYZ1lc1st3y67qpH0",
     authDomain: "expressme-27298.firebaseapp.com",
