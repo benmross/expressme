@@ -18,6 +18,18 @@ const dateStart = document.getElementById('date-start');
 const dateEnd = document.getElementById('date-end');
 const applyFiltersBtn = document.getElementById('apply-filters');
 const moodContainer = document.getElementById('mood-data');
+const modeSwitch = document.getElementById('mode-switch');
+const teacherDashboard = document.getElementById('teacher-dashboard');
+const studentInterface = document.getElementById('student-interface');
+const studentSelection = document.getElementById('student-selection');
+const zoneSelection = document.getElementById('zone-selection');
+const thankYou = document.getElementById('thank-you');
+const studentPicker = document.getElementById('student-picker');
+const confirmStudent = document.getElementById('confirm-student');
+const resetStudent = document.getElementById('reset-student');
+
+let selectedStudent = null;
+let isProcessing = false; // Prevent multiple submissions
 
 // Initialize the dashboard
 async function initializeDashboard() {
@@ -186,6 +198,135 @@ function createMoodChart(data) {
 
 // Event Listeners
 applyFiltersBtn.addEventListener('click', fetchAndDisplayMoodData);
+
+// Mode switching
+modeSwitch.addEventListener('click', async () => {
+    if (studentInterface.classList.contains('hidden')) {
+        // Enter student mode
+        await enterFullscreen();
+        teacherDashboard.classList.add('hidden');
+        studentInterface.classList.remove('hidden');
+        modeSwitch.textContent = 'Exit Student Mode';
+        // Populate student picker
+        await populateStudentPicker();
+    } else {
+        // Exit student mode
+        exitFullscreen();
+        resetStudentInterface();
+        teacherDashboard.classList.remove('hidden');
+        studentInterface.classList.add('hidden');
+        modeSwitch.textContent = 'Enter Student Mode';
+    }
+});
+
+// Populate student picker
+async function populateStudentPicker() {
+    try {
+        const students = await fetchStudents();
+        studentPicker.innerHTML = '<option value="">Choose your name</option>';
+        students.forEach(student => {
+            const option = document.createElement('option');
+            option.value = student.studentId;
+            option.textContent = `${student.firstName} ${student.lastName}`;
+            studentPicker.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error populating student picker:', error);
+    }
+}
+
+// Confirm student selection
+confirmStudent.addEventListener('click', () => {
+    selectedStudent = studentPicker.value;
+    if (selectedStudent) {
+        studentSelection.classList.add('hidden');
+        zoneSelection.classList.remove('hidden');
+    } else {
+        alert('Please choose your name first!');
+    }
+});
+
+// Handle zone selection
+zoneSelection.addEventListener('click', async (e) => {
+    if (isProcessing) return; // Prevent multiple submissions
+
+    const zoneElement = e.target.closest('.zone');
+    if (!zoneElement) return;
+
+    isProcessing = true;
+
+    try {
+        const zone = zoneElement.dataset.zone;
+        await db.collection('moodEntries').add({
+            studentId: selectedStudent,
+            timestamp: new Date(),
+            moodLabel: zone,
+            moodScore: getMoodScore(zone),
+            notes: `Student selected ${zone} zone`
+        });
+
+        zoneSelection.classList.add('hidden');
+        thankYou.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error logging mood:', error);
+        alert('Oops! Something went wrong. Please try again.');
+    } finally {
+        isProcessing = false;
+    }
+});
+
+// Reset for new student
+resetStudent.addEventListener('click', () => {
+    resetStudentInterface();
+});
+
+// Helper functions
+function getMoodScore(zone) {
+    const scores = {
+        green: 5,
+        blue: 2,
+        yellow: 3,
+        red: 1
+    };
+    return scores[zone] || 3;
+}
+
+function resetStudentInterface() {
+    selectedStudent = null;
+    studentPicker.value = '';
+    thankYou.classList.add('hidden');
+    zoneSelection.classList.add('hidden');
+    studentSelection.classList.remove('hidden');
+}
+
+async function enterFullscreen() {
+    try {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            await elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+            await elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            await elem.msRequestFullscreen();
+        }
+    } catch (error) {
+        console.error('Error entering fullscreen:', error);
+    }
+}
+
+function exitFullscreen() {
+    try {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    } catch (error) {
+        console.error('Error exiting fullscreen:', error);
+    }
+}
 
 // Initialize the dashboard when the page loads
 initializeDashboard(); 

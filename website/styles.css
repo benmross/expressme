@@ -65,4 +65,117 @@ th {
 
 .bar:hover {
     background-color: #45a049;
+}
+
+/* Student Mode Styles */
+.hidden {
+    display: none !important;
+}
+
+.student-interface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    z-index: 1000;
+}
+
+.student-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    gap: 20px;
+}
+
+.student-picker {
+    font-size: 24px;
+    padding: 10px;
+    width: 300px;
+}
+
+.zone-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+}
+
+.zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
+    padding: 20px;
+    transition: transform 0.2s;
+}
+
+.zone:hover {
+    transform: scale(0.98);
+}
+
+.zone h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.zone p {
+    font-size: 24px;
+}
+
+.green { background-color: #90EE90; }
+.blue { background-color: #ADD8E6; }
+.yellow { background-color: #FFFFE0; }
+.red { background-color: #FFB6C1; }
+
+.thank-you {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f0f0f0;
+}
+
+.thank-you h1 {
+    font-size: 64px;
+    margin-bottom: 40px;
+}
+
+.large-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.small-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #666;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.mode-switch-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
 } 

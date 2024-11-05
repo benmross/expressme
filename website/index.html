@@ -5,7 +5,8 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <div class="container">
+    <!-- Teacher Dashboard -->
+    <div id="teacher-dashboard" class="container">
       <h1>Student Mood Dashboard</h1>
       
       <div class="filters">
@@ -27,6 +28,41 @@
 
       <div id="mood-data" class="mood-container">
         <!-- Mood data will be populated here -->
+      </div>
+    </div>
+
+    <!-- Mode Switch Button -->
+    <button id="mode-switch" class="mode-switch-btn">Enter Student Mode</button>
+
+    <!-- Student Interface (hidden by default) -->
+    <div id="student-interface" class="student-interface hidden">
+      <!-- Student Selection -->
+      <div id="student-selection" class="student-selection">
+        <h2>Who are you?</h2>
+        <select id="student-picker" class="student-picker">
+          <option value="">Choose your name</option>
+        </select>
+        <button id="confirm-student" class="large-button">That's Me!</button>
+      </div>
+
+      <!-- Zone Selection (hidden initially) -->
+      <div id="zone-selection" class="zone-selection hidden">
+        <div class="zone green" data-zone="green">
+          <h2>Green Zone</h2>
+          <p>Happy, Calm, Focused</p>
+        </div>
+        <div class="zone blue" data-zone="blue">
+          <h2>Blue Zone</h2>
+          <p>Sad, Tired, Sick</p>
+        </div>
+        <div class="zone yellow" data-zone="yellow">
+          <h2>Yellow Zone</h2>
+          <p>Frustrated, Worried, Silly</p>
+        </div>
+        <div class="zone red" data-zone="red">
+          <h2>Red Zone</h2>
+          <p>Mad, Scared, Out</p>
+        </div>
       </div>
     </div>
 
