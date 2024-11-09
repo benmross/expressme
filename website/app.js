@@ -150,7 +150,9 @@ function displayMoodData(data) {
 
     data.forEach(entry => {
         const row = document.createElement('tr');
-        const date = new Date(entry.timestamp).toLocaleDateString();
+        // Convert Firebase timestamp to Date object
+        const timestamp = entry.timestamp instanceof Date ? entry.timestamp : entry.timestamp.toDate();
+        const date = timestamp.toLocaleDateString();
         
         row.innerHTML = `
             <td>${date}</td>
@@ -173,7 +175,8 @@ function createMoodChart(data) {
     // Group data by date and calculate average mood
     const dailyAverages = {};
     data.forEach(entry => {
-        const date = new Date(entry.timestamp).toLocaleDateString();
+        const timestamp = entry.timestamp instanceof Date ? entry.timestamp : entry.timestamp.toDate();
+        const date = timestamp.toLocaleDateString();
         if (!dailyAverages[date]) {
             dailyAverages[date] = { sum: 0, count: 0 };
         }
