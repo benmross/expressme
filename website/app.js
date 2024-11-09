@@ -362,8 +362,6 @@ function exitFullscreen() {
     }
 }
 
-// Initialize the dashboard when the page loads
-initializeDashboard();
 
 // Initialize student mode by default
 document.addEventListener('DOMContentLoaded', () => {
