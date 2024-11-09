@@ -5,71 +5,81 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <!-- Teacher Dashboard -->
-    <div id="teacher-dashboard" class="container">
-      <h1>Student Mood Dashboard</h1>
-      
-      <div class="filters">
-        <div class="filter-group">
-          <label for="student-select">Select Student:</label>
-          <select id="student-select">
-            <option value="">All Students</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <label for="date-range">Date Range:</label>
-          <input type="date" id="date-start">
-          <input type="date" id="date-end">
-        </div>
-        
-        <button id="apply-filters">Apply Filters</button>
-      </div>
+    <!-- Mode Switch Button -->
+    <button id="mode-switch" class="mode-switch-btn">Teacher Mode</button>
 
-      <div id="mood-data" class="mood-container">
-        <!-- Mood data will be populated here -->
-      </div>
+    <!-- Teacher Authentication Modal -->
+    <div id="teacher-auth" class="teacher-auth hidden">
+        <div class="auth-content">
+            <h2>Enter Teacher Code</h2>
+            <input type="password" id="teacher-code" placeholder="Enter code">
+            <button id="submit-code">Submit</button>
+            <button id="cancel-auth">Cancel</button>
+        </div>
     </div>
 
-    <!-- Mode Switch Button -->
-    <button id="mode-switch" class="mode-switch-btn">Enter Student Mode</button>
+    <!-- Teacher Dashboard (hidden by default) -->
+    <div id="teacher-dashboard" class="container hidden">
+        <h1>Student Mood Dashboard</h1>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="student-select">Select Student:</label>
+                <select id="student-select">
+                    <option value="">All Students</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="date-range">Date Range:</label>
+                <input type="date" id="date-start">
+                <input type="date" id="date-end">
+            </div>
+            
+            <button id="apply-filters">Apply Filters</button>
+        </div>
 
-    <!-- Student Interface (hidden by default) -->
-    <div id="student-interface" class="student-interface hidden">
-      <!-- Student Selection -->
-      <div id="student-selection" class="student-selection">
-        <h2>Who are you?</h2>
-        <select id="student-picker" class="student-picker">
-          <option value="">Choose your name</option>
-        </select>
-        <button id="confirm-student" class="large-button">That's Me!</button>
-      </div>
+        <div id="mood-data" class="mood-container">
+            <!-- Mood data will be populated here -->
+        </div>
+    </div>
 
-      <!-- Zone Selection (hidden initially) -->
-      <div id="zone-selection" class="zone-selection hidden">
-        <div class="zone green" data-zone="green">
-          <h2>Green Zone</h2>
-          <p>Happy, Calm, Focused</p>
+    <!-- Student Interface (shown by default) -->
+    <div id="student-interface" class="student-interface">
+        <!-- Student Selection -->
+        <div id="student-selection" class="student-selection">
+            <h2>Who are you?</h2>
+            <select id="student-picker" class="student-picker">
+                <option value="">Choose your name</option>
+            </select>
+            <button id="confirm-student" class="large-button">That's Me!</button>
         </div>
-        <div class="zone blue" data-zone="blue">
-          <h2>Blue Zone</h2>
-          <p>Sad, Tired, Sick</p>
-        </div>
-        <div class="zone yellow" data-zone="yellow">
-          <h2>Yellow Zone</h2>
-          <p>Frustrated, Worried, Silly</p>
-        </div>
-        <div class="zone red" data-zone="red">
-          <h2>Red Zone</h2>
-          <p>Mad, Scared, Out</p>
-        </div>
-      </div>
 
-      <!-- Thank You Screen (hidden initially) -->
-      <div id="thank-you" class="thank-you hidden">
-        <h1>Thank you for sharing!</h1>
-        <button id="reset-student" class="small-button">New Student</button>
-      </div>
+        <!-- Zone Selection (hidden initially) -->
+        <div id="zone-selection" class="zone-selection hidden">
+            <div class="zone green" data-zone="green">
+                <h2>Green Zone</h2>
+                <p>Happy, Calm, Focused</p>
+            </div>
+            <div class="zone blue" data-zone="blue">
+                <h2>Blue Zone</h2>
+                <p>Sad, Tired, Sick</p>
+            </div>
+            <div class="zone yellow" data-zone="yellow">
+                <h2>Yellow Zone</h2>
+                <p>Frustrated, Worried, Silly</p>
+            </div>
+            <div class="zone red" data-zone="red">
+                <h2>Red Zone</h2>
+                <p>Mad, Scared, Out</p>
+            </div>
+        </div>
+
+        <!-- Thank You Screen (hidden initially) -->
+        <div id="thank-you" class="thank-you hidden">
+            <h1>Thank you for sharing!</h1>
+            <button id="reset-student" class="small-button">New Student</button>
+        </div>
     </div>
 
     <!-- Load Firebase first -->

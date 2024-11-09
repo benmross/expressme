@@ -178,4 +178,51 @@ th {
     top: 20px;
     right: 20px;
     z-index: 1001;
+}
+
+.teacher-auth {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.auth-content input {
+    font-size: 24px;
+    padding: 10px;
+    margin: 20px 0;
+    width: 200px;
+    text-align: center;
+}
+
+.auth-content button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#submit-code {
+    background: #4CAF50;
+    color: white;
+}
+
+#cancel-auth {
+    background: #666;
+    color: white;
 } 

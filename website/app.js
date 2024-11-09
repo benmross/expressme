@@ -27,9 +27,16 @@ const thankYou = document.getElementById('thank-you');
 const studentPicker = document.getElementById('student-picker');
 const confirmStudent = document.getElementById('confirm-student');
 const resetStudent = document.getElementById('reset-student');
+const teacherAuth = document.getElementById('teacher-auth');
+const teacherCode = document.getElementById('teacher-code');
+const submitCode = document.getElementById('submit-code');
+const cancelAuth = document.getElementById('cancel-auth');
 
 let selectedStudent = null;
 let isProcessing = false; // Prevent multiple submissions
+
+// Teacher code (in a real app, this would be managed securely)
+const TEACHER_CODE = '1234';
 
 // Initialize the dashboard
 async function initializeDashboard() {
@@ -200,23 +207,39 @@ function createMoodChart(data) {
 applyFiltersBtn.addEventListener('click', fetchAndDisplayMoodData);
 
 // Mode switching
-modeSwitch.addEventListener('click', async () => {
-    if (studentInterface.classList.contains('hidden')) {
-        // Enter student mode
-        await enterFullscreen();
+modeSwitch.addEventListener('click', () => {
+    if (teacherDashboard.classList.contains('hidden')) {
+        // Show teacher authentication
+        teacherAuth.classList.remove('hidden');
+        teacherCode.focus();
+    } else {
+        // Exit teacher mode
         teacherDashboard.classList.add('hidden');
         studentInterface.classList.remove('hidden');
-        modeSwitch.textContent = 'Exit Student Mode';
-        // Populate student picker
-        await populateStudentPicker();
-    } else {
-        // Exit student mode
-        exitFullscreen();
-        resetStudentInterface();
-        teacherDashboard.classList.remove('hidden');
-        studentInterface.classList.add('hidden');
-        modeSwitch.textContent = 'Enter Student Mode';
+        modeSwitch.textContent = 'Teacher Mode';
     }
+});
+
+// Handle teacher authentication
+submitCode.addEventListener('click', async () => {
+    if (teacherCode.value === TEACHER_CODE) {
+        teacherAuth.classList.add('hidden');
+        teacherCode.value = '';
+        studentInterface.classList.add('hidden');
+        teacherDashboard.classList.remove('hidden');
+        modeSwitch.textContent = 'Exit Teacher Mode';
+        await initializeDashboard();
+    } else {
+        alert('Incorrect code');
+        teacherCode.value = '';
+        teacherCode.focus();
+    }
+});
+
+// Cancel authentication
+cancelAuth.addEventListener('click', () => {
+    teacherAuth.classList.add('hidden');
+    teacherCode.value = '';
 });
 
 // Populate student picker
@@ -329,4 +352,10 @@ function exitFullscreen() {
 }
 
 // Initialize the dashboard when the page loads
-initializeDashboard(); 
+initializeDashboard();
+
+// Initialize student mode by default
+document.addEventListener('DOMContentLoaded', () => {
+    enterFullscreen();
+    populateStudentPicker();
+}); 
