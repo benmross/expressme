@@ -1,3 +1,16 @@
+:root {
+    --primary-color: #4A90E2;
+    --primary-hover: #357ABD;
+    --light-blue: #EBF4FF;
+    --border-color: #E1E8ED;
+}
+
+/* Base styles */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -9,14 +22,38 @@
     gap: 20px;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.filter-group select, 
+.filter-group input {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+#apply-filters {
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#apply-filters:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
 }
 
 .mood-container {
@@ -131,10 +168,10 @@ th {
     font-size: 24px;
 }
 
-.green { background-color: #90EE90; }
-.blue { background-color: #ADD8E6; }
-.yellow { background-color: #FFFFE0; }
-.red { background-color: #FFB6C1; }
+.green { background-color: #E3F2FD; }
+.blue { background-color: #BBDEFB; }
+.yellow { background-color: #FFF3E0; }
+.red { background-color: #FFEBEE; }
 
 .thank-you {
     display: flex;
@@ -150,67 +187,6 @@ th {
     margin-bottom: 40px;
 }
 
-.large-button {
-    font-size: 24px;
-    padding: 15px 30px;
-    border-radius: 50px;
-    border: none;
-    background: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.large-button:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.small-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
-    background: #6B7C93;
-    color: white;
-    cursor: pointer;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.small-button:hover {
-    background: #566B8C;
-    transform: translateY(-1px);
-}
-
-.mode-switch-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 25px;
-    border: 2px solid var(--primary-color);
-    background: white;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.mode-switch-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
 .teacher-auth {
     position: fixed;
     top: 0;
@@ -224,120 +200,7 @@ th {
     justify-content: center;
 }
 
-.auth-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
 
-.auth-content input {
-    font-size: 24px;
-    padding: 12px;
-    margin: 20px 0;
-    width: 240px;
-    text-align: center;
-    border: 2px solid var(--border-color);
-    border-radius: 12px;
-    transition: border-color 0.3s ease;
-}
-
-.auth-content input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-#submit-code {
-    background: var(--primary-color);
-    color: white;
-}
-
-#submit-code:hover {
-    background: var(--primary-hover);
-}
-
-#cancel-auth {
-    background: #666;
-    color: white;
-}
-
-/* Update color variables */
-:root {
-    --primary-color: #4A90E2;
-    --primary-hover: #357ABD;
-    --light-blue: #EBF4FF;
-    --border-color: #E1E8ED;
-}
-
-/* Update existing button styles */
-.large-button {
-    font-size: 24px;
-    padding: 15px 30px;
-    border-radius: 50px;
-    border: none;
-    background: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.large-button:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.small-button {
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: none;
-    background: #6B7C93;
-    color: white;
-    cursor: pointer;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-}
-
-.small-button:hover {
-    background: #566B8C;
-    transform: translateY(-1px);
-}
-
-/* Update teacher mode button */
-.mode-switch-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 25px;
-    border: 2px solid var(--primary-color);
-    background: white;
-    color: var(--primary-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.mode-switch-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-/* Update zone colors */
-.green { background-color: #E3F2FD; }
-.blue { background-color: #BBDEFB; }
-.yellow { background-color: #FFF3E0; }
-.red { background-color: #FFEBEE; }
 
 /* Update authentication modal */
 .auth-content {
