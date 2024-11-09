@@ -297,7 +297,7 @@ zoneSelection.addEventListener('click', async (e) => {
         const zone = zoneElement.dataset.zone;
         await db.collection('moodEntries').add({
             studentId: selectedStudent,
-            timestamp: new Date(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Use server timestamp
             moodLabel: zone,
             moodScore: getMoodScore(zone),
             notes: `Student selected ${zone} zone`
