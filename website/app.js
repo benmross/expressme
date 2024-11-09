@@ -270,9 +270,10 @@ async function populateStudentPicker() {
 }
 
 // Confirm student selection
-confirmStudent.addEventListener('click', () => {
+confirmStudent.addEventListener('click', async () => {
     selectedStudent = studentPicker.value;
     if (selectedStudent) {
+        await enterFullscreen();  // Enter fullscreen when student confirms
         studentSelection.classList.add('hidden');
         zoneSelection.classList.remove('hidden');
     } else {
@@ -365,6 +366,5 @@ function exitFullscreen() {
 
 // Initialize student mode by default
 document.addEventListener('DOMContentLoaded', () => {
-    enterFullscreen();
     populateStudentPicker();
 }); 
