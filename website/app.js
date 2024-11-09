@@ -150,12 +150,18 @@ function displayMoodData(data) {
 
     data.forEach(entry => {
         const row = document.createElement('tr');
-        // Convert Firebase timestamp to Date object
-        const timestamp = entry.timestamp instanceof Date ? entry.timestamp : entry.timestamp.toDate();
-        const date = timestamp.toLocaleDateString();
+        // Convert timestamp to Date object
+        const date = new Date(entry.timestamp);
+        const formattedDate = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
         
         row.innerHTML = `
-            <td>${date}</td>
+            <td>${formattedDate}</td>
             <td>${entry.studentName}</td>
             <td>${entry.moodLabel}</td>
             <td>${entry.moodScore}/5</td>
@@ -175,13 +181,16 @@ function createMoodChart(data) {
     // Group data by date and calculate average mood
     const dailyAverages = {};
     data.forEach(entry => {
-        const timestamp = entry.timestamp instanceof Date ? entry.timestamp : entry.timestamp.toDate();
-        const date = timestamp.toLocaleDateString();
-        if (!dailyAverages[date]) {
-            dailyAverages[date] = { sum: 0, count: 0 };
+        const date = new Date(entry.timestamp);
+        const dateStr = date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric'
+        });
+        if (!dailyAverages[dateStr]) {
+            dailyAverages[dateStr] = { sum: 0, count: 0 };
         }
-        dailyAverages[date].sum += entry.moodScore;
-        dailyAverages[date].count += 1;
+        dailyAverages[dateStr].sum += entry.moodScore;
+        dailyAverages[dateStr].count += 1;
     });
 
     // Create chart container
@@ -297,7 +306,7 @@ zoneSelection.addEventListener('click', async (e) => {
         const zone = zoneElement.dataset.zone;
         await db.collection('moodEntries').add({
             studentId: selectedStudent,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Use server timestamp
+            timestamp: Date.now(), // Store as milliseconds since epoch
             moodLabel: zone,
             moodScore: getMoodScore(zone),
             notes: `Student selected ${zone} zone`
