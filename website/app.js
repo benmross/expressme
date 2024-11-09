@@ -207,22 +207,25 @@ function createMoodChart(data) {
 applyFiltersBtn.addEventListener('click', fetchAndDisplayMoodData);
 
 // Mode switching
-modeSwitch.addEventListener('click', () => {
-    if (teacherDashboard.classList.contains('hidden')) {
-        // Show teacher authentication
-        teacherAuth.classList.remove('hidden');
-        teacherCode.focus();
-    } else {
+modeSwitch.addEventListener('click', async () => {
+    if (studentInterface.classList.contains('hidden')) {
         // Exit teacher mode
+        exitFullscreen();
         teacherDashboard.classList.add('hidden');
         studentInterface.classList.remove('hidden');
         modeSwitch.textContent = 'Teacher Mode';
+    } else {
+        // Show teacher authentication modal
+        teacherAuth.classList.remove('hidden');
+        teacherCode.value = ''; // Clear any previous input
+        teacherCode.focus();
     }
 });
 
 // Handle teacher authentication
 submitCode.addEventListener('click', async () => {
     if (teacherCode.value === TEACHER_CODE) {
+        // Correct code entered
         teacherAuth.classList.add('hidden');
         teacherCode.value = '';
         studentInterface.classList.add('hidden');
@@ -230,6 +233,7 @@ submitCode.addEventListener('click', async () => {
         modeSwitch.textContent = 'Exit Teacher Mode';
         await initializeDashboard();
     } else {
+        // Wrong code
         alert('Incorrect code');
         teacherCode.value = '';
         teacherCode.focus();
@@ -240,6 +244,13 @@ submitCode.addEventListener('click', async () => {
 cancelAuth.addEventListener('click', () => {
     teacherAuth.classList.add('hidden');
     teacherCode.value = '';
+});
+
+// Allow Enter key to submit code
+teacherCode.addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+        submitCode.click();
+    }
 });
 
 // Populate student picker
