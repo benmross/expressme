@@ -208,17 +208,17 @@ applyFiltersBtn.addEventListener('click', fetchAndDisplayMoodData);
 
 // Mode switching
 modeSwitch.addEventListener('click', async () => {
-    if (studentInterface.classList.contains('hidden')) {
+    if (teacherDashboard.classList.contains('hidden')) {
+        // Trying to enter teacher mode
+        teacherAuth.classList.remove('hidden');
+        teacherCode.value = ''; // Clear any previous input
+        teacherCode.focus();
+    } else {
         // Exit teacher mode
         exitFullscreen();
         teacherDashboard.classList.add('hidden');
         studentInterface.classList.remove('hidden');
         modeSwitch.textContent = 'Teacher Mode';
-    } else {
-        // Show teacher authentication modal
-        teacherAuth.classList.remove('hidden');
-        teacherCode.value = ''; // Clear any previous input
-        teacherCode.focus();
     }
 });
 
