@@ -126,6 +126,7 @@ th {
     justify-content: center;
     height: 100vh;
     gap: 20px;
+    position: relative;
 }
 
 .student-picker {
@@ -168,10 +169,10 @@ th {
     font-size: 24px;
 }
 
-.green { background-color: #E3F2FD; }
-.blue { background-color: #BBDEFB; }
-.yellow { background-color: #FFF3E0; }
-.red { background-color: #FFEBEE; }
+.green { background-color: #01935f }
+.blue { background-color: #0156a8; }
+.yellow { background-color: #fcd602; }
+.red { background-color: #ed1b2f; }
 
 .thank-you {
     display: flex;
@@ -329,4 +330,20 @@ th {
     background: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-} 
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.error-message.visible {
+    opacity: 1;
+}
+
+.student-selection {
+    position: relative;
+}

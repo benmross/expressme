@@ -245,8 +245,8 @@ submitCode.addEventListener('click', async () => {
         modeSwitch.textContent = 'Exit Teacher Mode';
         await initializeDashboard();
     } else {
-        // Wrong code
-        alert('Incorrect code');
+        // Wrong code - replace alert with showError
+        showError(document.querySelector('.auth-content'), 'Incorrect code');
         teacherCode.value = '';
         teacherCode.focus();
     }
@@ -285,40 +285,22 @@ async function populateStudentPicker() {
 confirmStudent.addEventListener('click', async () => {
     selectedStudent = studentPicker.value;
     if (selectedStudent) {
-        await enterFullscreen();  // Enter fullscreen when student confirms
+        await enterFullscreen();
         studentSelection.classList.add('hidden');
         zoneSelection.classList.remove('hidden');
     } else {
-        alert('Please choose your name first!');
+        showError(studentSelection, 'Please choose your name first!');
     }
 });
 
 // Handle zone selection
 zoneSelection.addEventListener('click', async (e) => {
-    if (isProcessing) return; // Prevent multiple submissions
-
-    const zoneElement = e.target.closest('.zone');
-    if (!zoneElement) return;
-
-    isProcessing = true;
-
-    try {
-        const zone = zoneElement.dataset.zone;
-        await db.collection('moodEntries').add({
-            studentId: selectedStudent,
-            timestamp: Date.now(), // Store as milliseconds since epoch
-            moodLabel: zone,
-            moodScore: getMoodScore(zone),
-            notes: `Student selected ${zone} zone`
-        });
-
-        zoneSelection.classList.add('hidden');
-        thankYou.classList.remove('hidden');
-    } catch (error) {
-        console.error('Error logging mood:', error);
-        alert('Oops! Something went wrong. Please try again.');
-    } finally {
-        isProcessing = false;
+    if (selectedStudent) {
+        await enterFullscreen();
+        studentSelection.classList.add('hidden');
+        zoneSelection.classList.remove('hidden');
+    } else {
+        showError(studentSelection, 'Please choose your name first!');
     }
 });
 
@@ -336,6 +318,31 @@ function getMoodScore(zone) {
         red: 1
     };
     return scores[zone] || 3;
+}
+
+function showError(parentElement, message) {
+    // Remove any existing error messages
+    const existingError = parentElement.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+
+    // Create and add new error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    parentElement.appendChild(errorDiv);
+
+    // Make it visible after a brief delay (for animation)
+    requestAnimationFrame(() => {
+        errorDiv.classList.add('visible');
+    });
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        errorDiv.classList.remove('visible');
+        setTimeout(() => errorDiv.remove(), 300);
+    }, 3000);
 }
 
 function resetStudentInterface() {
