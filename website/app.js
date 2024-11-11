@@ -295,12 +295,30 @@ confirmStudent.addEventListener('click', async () => {
 
 // Handle zone selection
 zoneSelection.addEventListener('click', async (e) => {
-    if (selectedStudent) {
-        await enterFullscreen();
-        studentSelection.classList.add('hidden');
-        zoneSelection.classList.remove('hidden');
-    } else {
-        showError(studentSelection, 'Please choose your name first!');
+    if (isProcessing) return; // Prevent multiple submissions
+
+    const zoneElement = e.target.closest('.zone');
+    if (!zoneElement) return;
+
+    isProcessing = true;
+
+    try {
+        const zone = zoneElement.dataset.zone;
+        await db.collection('moodEntries').add({
+            studentId: selectedStudent,
+            timestamp: Date.now(),
+            moodLabel: zone,
+            moodScore: getMoodScore(zone),
+            notes: `Student selected ${zone} zone`
+        });
+
+        zoneSelection.classList.add('hidden');
+        thankYou.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error logging mood:', error);
+        showError(zoneSelection, 'Something went wrong. Please try again.');
+    } finally {
+        isProcessing = false;
     }
 });
 
