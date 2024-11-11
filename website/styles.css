@@ -227,6 +227,16 @@ th {
     border-color: var(--primary-color);
 }
 
+#submit-code, #cancel-auth {
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+
 #submit-code {
     background: var(--primary-color);
     color: white;
@@ -234,6 +244,17 @@ th {
 
 #submit-code:hover {
     background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+#cancel-auth {
+    background: #f0f0f0;
+    color: #666;
+}
+
+#cancel-auth:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
 }
 
 /* Update table styles */
@@ -248,4 +269,64 @@ th {
 
 .bar:hover {
     background-color: var(--primary-hover);
+}
+
+/* Add these button styles after line 12 */
+.mode-switch-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 2px solid var(--primary-color);
+    background: white;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.mode-switch-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.large-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.large-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.small-button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.small-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 } 
