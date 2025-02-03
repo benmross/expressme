@@ -21,6 +21,13 @@
     <!-- Teacher Dashboard (hidden by default) -->
     <div id="teacher-dashboard" class="container hidden">
         <h1>Student Mood Dashboard</h1>
+
+        <div id="weekly-summary" class="weekly-summary-container" data-start-date="">
+            <h2>Weekly Summary</h2>
+            <button id="prev-week-btn" class="small-button">Previous Week</button>
+            <button id="next-week-btn" class="small-button">Next Week</button>
+            <!-- Weekly summary table will be populated here -->
+        </div>
         
         <div class="filters">
             <div class="filter-group">
@@ -41,6 +48,60 @@
 
         <div id="mood-data" class="mood-container">
             <!-- Mood data will be populated here -->
+        </div>
+
+        <div class="additional-views">
+            <h2>Additional Views</h2>
+            
+            <div class="view-group">
+                <label for="specific-date">View Data for Specific Date:</label>
+                <input type="date" id="specific-date">
+                <button id="view-date-data-btn">View Data</button>
+            </div>
+            
+            <div id="data-for-date" class="data-container">
+                <!-- Data for specific date will be populated here -->
+            </div>
+            
+            <div class="view-group">
+                <button id="view-student-data-btn">View Data for Selected Student Over Time</button>
+            </div>
+            
+            <div id="student-data-over-time" class="data-container">
+                <!-- Data for selected student over time will be populated here -->
+            </div>
+        </div>
+
+        <div class="add-student">
+            <h2>Add New Student</h2>
+            <form id="add-student-form">
+                <div class="form-group">
+                    <label for="student-first-name">First Name:</label>
+                    <input type="text" id="student-first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-last-name">Last Name:</label>
+                    <input type="text" id="student-last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-grade">Grade:</label>
+                    <input type="text" id="student-grade" required>
+                </div>
+                <button id="add-student-btn" class="large-button">Add Student</button>
+            </form>
+        </div>
+
+        <div class="remove-student">
+            <h2>Remove Student</h2>
+            <form id="remove-student-form">
+                <div class="form-group">
+                    <label for="student-to-remove">Select Student:</label>
+                    <select id="student-to-remove">
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <button id="remove-student-btn" class="large-button">Remove Student</button>
+            </form>
         </div>
     </div>
 

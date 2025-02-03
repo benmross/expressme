@@ -347,3 +347,211 @@ th {
 .student-selection {
     position: relative;
 }
+
+/* Add these to your existing CSS */
+.additional-views {
+    margin-top: 20px;
+}
+
+.view-group {
+    margin-bottom: 20px;
+}
+
+.view-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.view-group button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.view-group button:hover {
+    background-color: #0056b3;
+}
+
+.mood-chart {
+    margin-top: 20px;
+}
+
+.chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.bar {
+    width: 30px;
+    transition: height 0.3s ease;
+}
+
+.bar.green {
+    background-color: #01935f;
+}
+
+.bar.blue {
+    background-color: #0156a8;
+}
+
+.bar.yellow {
+    background-color: #fcd602;
+}
+
+.bar.red {
+    background-color: #ed1b2f;
+}
+
+.bar-label {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.bar {
+    width: 30px;
+    background-color: var(--primary-color);
+    transition: height 0.3s ease;
+}
+
+.bar:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ...existing code... */
+
+.add-student {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.add-student h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-size: 14px;
+    margin-top: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.success-message.visible {
+    opacity: 1;
+}
+
+/* ...existing code... */
+
+.remove-student {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.remove-student h2 {
+    margin-bottom: 20px;
+}
+
+.time-of-day-chart {
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.time-of-day-chart .chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.time-of-day-chart .bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.time-of-day-chart .bar {
+    width: 30px;
+    background-color: var(--primary-color);
+    transition: height 0.3s ease;
+}
+
+.time-of-day-chart .bar:hover {
+    background-color: var(--primary-hover);
+}
+
+.time-of-day-chart .bar-label {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* ...existing code... */
+
+.weekly-summary-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: var(--light-blue);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.weekly-summary-container h2 {
+    margin-bottom: 20px;
+}
+
+.weekly-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.weekly-summary-table th, .weekly-summary-table td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.weekly-summary-table th {
+    background-color: #f5f5f5;
+}
+
+.weekly-summary-table td {
+    transition: background-color 0.3s ease;
+}
+
+/* ...existing code... */
